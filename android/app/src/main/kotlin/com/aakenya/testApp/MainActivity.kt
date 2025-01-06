@@ -1,4 +1,4 @@
-package com.aakenya.test_app_v2
+package com.aakenya.testApp
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -30,8 +30,8 @@ class CustomButtonWithIcon extends StatelessWidget {
       onPressed: onPressed,
       icon: Image.asset(
         iconPath,
-        width: 24,
-        height: 24,
+        width: 32,
+        height: 30,
       ),
       label: Text(
         text,

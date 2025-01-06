@@ -1,40 +1,54 @@
 import 'package:flutter/material.dart';
 
-class passwordField extends StatefulWidget {
+class PasswordField extends StatefulWidget {
   final String labelText;
   final IconData iconData;
   final bool isPasswordField;
   final TextInputType keyboardType;
   final TextInputAction? textInputAction;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
+  final FormFieldSetter<String>? onSaved;
 
-  const passwordField({
+  const PasswordField({
     super.key,
     required this.labelText,
     required this.iconData,
-    this.isPasswordField = false,
-    this.keyboardType = TextInputType.text,
+    this.isPasswordField = true,
+    this.keyboardType = TextInputType.visiblePassword,
     this.textInputAction,
+    this.controller,
+    this.validator,
+    this.onSaved,
   });
 
   @override
-  State<passwordField> createState() => _passwordFieldState();
+  State<PasswordField> createState() => _PasswordFieldState();
 }
 
-class _passwordFieldState extends State<passwordField> {
+class _PasswordFieldState extends State<PasswordField> {
   bool isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       obscureText: widget.isPasswordField && !isPasswordVisible,
       keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction,
+      controller: widget.controller,
+      validator: widget.validator,
+      onSaved: widget.onSaved,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        labelStyle: const TextStyle(color: Color(0xFF024F31),fontFamily: 'Inter',fontSize: 16,fontWeight: FontWeight.w600),
+        labelStyle: const TextStyle(
+          color: Color(0xFF024F31),
+          fontFamily: 'Inter',
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
@@ -49,11 +63,17 @@ class _passwordFieldState extends State<passwordField> {
             width: 1.0,
           ),
         ),
-        prefixIcon: Icon(widget.iconData,color:const Color(0xFF024F31),),
+        prefixIcon: Icon(
+          widget.iconData,
+          color: const Color(0xFF024F31),
+        ),
         suffixIcon: widget.isPasswordField
             ? IconButton(
           icon: Icon(
-            isPasswordVisible ? Icons.visibility : Icons.visibility_off,color: const Color(0xFF024F31),
+            isPasswordVisible
+                ? Icons.visibility
+                : Icons.visibility_off,
+            color: const Color(0xFF024F31),
           ),
           onPressed: () {
             setState(() {
@@ -62,6 +82,12 @@ class _passwordFieldState extends State<passwordField> {
           },
         )
             : null,
+      ),
+      style: const TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
       ),
     );
   }

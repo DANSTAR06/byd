@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
-
-import 'intro_one.dart';
-
-//import 'auth/login.screen.dart';
+import 'package:lottie/lottie.dart'; // Import Lottie package
+import '../../controllers/auth.dart';
+import '../main/home.dart';
+import 'intro_one.dart'; // Import your next screen
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,8 +13,7 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -29,18 +28,21 @@ class _SplashScreenState extends State<SplashScreen>
     )..repeat(reverse: true); // Repeat blinking
 
     // Define animation (fade in and out)
-    _animation = Tween<double>(begin: 0.0, end: 2.0).animate(_controller);
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
 
     // Navigate to the next screen after a delay
-    Timer(const Duration(seconds: 10), () {
-      _navigateToHome();
+    Timer(const Duration(seconds: 7), () {
+      _navigateToIntro();
     });
   }
 
-  void _navigateToHome() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const IntroScreenOne()),
-    );
+  void _navigateToIntro() {
+    // Example: Navigate based on authentication state
+    if (AuthController.instance.user != null) {
+      Get.offAll(() => const HomeScreen()); // Navigate to home if authenticated
+    } else {
+      Get.offAll(() => const IntroScreenOne()); // Navigate to intro screen
+    }
   }
 
   @override
@@ -52,17 +54,31 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: const Color(0xFFF5EEC7)
-      backgroundColor: const Color(0xFFF5EEC7), // Background color
-      body: Center(
-        child: FadeTransition(
-          opacity: _animation, // Apply the animation
-          child: Image.asset(
-            'assets/images/aalogo.png', // Logo path
-            width: 200, // Adjust size as needed
-            height: 200,
+      backgroundColor: const Color(0xFF024F31),
+      body: Stack(
+        children: [
+          // Lottie animation as background
+          Center(
+            child: Lottie.asset(
+              'assets/anime/truckongreenanime.json', // Lottie file path
+              fit: BoxFit.cover, // Covers the entire screen
+              //width: Get.width*1.80,
+              //height:double.infinity,
+            ),
           ),
-        ),
+          // Logo with FadeTransition
+          Align(
+            alignment: Alignment.bottomRight,
+            child: FadeTransition(
+              opacity: _animation, // Apply fade animation
+              child: Image.asset(
+                'assets/images/aalogo.png', // Logo path
+                width: Get.width*2.0,
+                height: Get.height*2.0,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

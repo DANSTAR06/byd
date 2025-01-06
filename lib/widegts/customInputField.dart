@@ -7,7 +7,8 @@ class CustomInputField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
-
+  final FormFieldValidator<String>? validator;
+  final FormFieldSetter<String>? onSaved;
 
   const CustomInputField({
     super.key,
@@ -17,15 +18,19 @@ class CustomInputField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.textInputAction,
     this.controller,
-
+    this.validator,
+    this.onSaved,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       obscureText: isPasswordField,
       keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      validator: validator,
+      onSaved: onSaved,
       cursorColor: const Color(0xFF024F31),
       style: const TextStyle(
         fontFamily: 'Inter',
@@ -35,22 +40,32 @@ class CustomInputField extends StatelessWidget {
       ),
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: const TextStyle(color: Color(0xFF024F31),fontFamily: 'Inter',fontWeight: FontWeight.w600,fontSize: 16),
-        prefixIcon: iconData != null ? Icon(iconData, color: const Color(0xFF024F31),) : null,
+        labelStyle: const TextStyle(
+          color: Color(0xFF024F31),
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w600,
+          fontSize: 16,
+        ),
+        prefixIcon: iconData != null
+            ? Icon(
+          iconData,
+          color: const Color(0xFF024F31),
+        )
+            : null,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
-            color: Color(0xFF024F31), // Dark green focus border
-            width: 2.0, // Thickness of the focus border
+            color: Color(0xFF024F31),
+            width: 2.0,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
-            color: Color(0xFF024F31), // darkgreen border when not focused
+            color: Color(0xFF024F31),
             width: 1.0,
           ),
         ),
@@ -58,4 +73,5 @@ class CustomInputField extends StatelessWidget {
     );
   }
 }
+
 

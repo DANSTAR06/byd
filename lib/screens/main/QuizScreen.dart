@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../widegts/button.dart';
 import '../../widegts/sidebar.dart';
 import 'ResultsScreen.dart';
+import 'package:get/get.dart';
+
 
 class QuizScreen extends StatefulWidget {
   final String topicName;
@@ -21,13 +23,20 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  bool _showAnswer = false;
+  Map<int, bool> showAnswers = {
+  }; // Keep track of show/hide answer per question
   int _currentIndex = 0; // Active question index
   Map<int, String> userAnswers = {}; // Store user answers
+
   final List<Map<String, dynamic>> questions = [
     {
       "question": "What is required to drive On Kenyan Roads?",
-      "options": ["Driving license", "Vehicle Insurance", "Vehicle documents", "All the above"],
+      "options": [
+        "Driving license",
+        "Vehicle Insurance",
+        "Vehicle documents",
+        "All the above"
+      ],
       "answer": "All the above",
     },
     {
@@ -38,7 +47,7 @@ class _QuizScreenState extends State<QuizScreen> {
         "Driving Old Vehicles",
         "All the above"
       ],
-      "answer": "Over Speeding",
+      "answer": "Over speeding", // Corrected case to match comparison
     },
     {
       "question": "Which one of the following is a compulsory traffic sign?",
@@ -48,7 +57,7 @@ class _QuizScreenState extends State<QuizScreen> {
         "Pedestrian crossing place",
         "Proceed straight or turn left"
       ],
-      "answer": "Pass to the left and Proceed straight or turn left",
+      "answer": "Pass to the left",
     }
     // Add more questions as needed
   ];
@@ -56,7 +65,7 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     super.initState();
-    _currentIndex = widget.questionIndex; // Initialize the current index from the passed data
+    _currentIndex = widget.questionIndex; // Initialize the current index
   }
 
   void _selectAnswer(String answer) {
@@ -74,15 +83,15 @@ class _QuizScreenState extends State<QuizScreen> {
     }
     double scorePercentage = (correctAnswers / questions.length) * 100;
 
-    // Navigate to the result screen
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ResultScreen(
-          score: scorePercentage,
-          correctAnswers: correctAnswers,
-          totalQuestions: questions.length,
-        ),
+        builder: (context) =>
+            ResultScreen(
+              score: scorePercentage,
+              correctAnswers: correctAnswers,
+              totalQuestions: questions.length,
+            ),
       ),
     );
   }
@@ -102,7 +111,8 @@ class _QuizScreenState extends State<QuizScreen> {
         ),
         title: Text(
           widget.topicName,
-          style: const TextStyle(fontFamily: "Inter", fontSize: 16, fontWeight: FontWeight.w600),
+          style: const TextStyle(
+              fontFamily: "Inter", fontSize: 16, fontWeight: FontWeight.w600),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -118,14 +128,20 @@ class _QuizScreenState extends State<QuizScreen> {
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Question: ${_currentIndex + 1}/${widget.totalQuestions}",
-                    style: const TextStyle(fontFamily: "Inter", fontSize: 16, fontWeight: FontWeight.w900, color: Colors.green),
+                    style: const TextStyle(fontFamily: "Inter",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.green),
                   ),
                 ),
                 const Spacer(),
                 InkWell(
                   child: const Text(
                     'Quit',
-                    style: TextStyle(fontFamily: "Inter", fontSize: 16, fontWeight: FontWeight.w600, color: Colors.red),
+                    style: TextStyle(fontFamily: "Inter",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.red),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -133,12 +149,14 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+             SizedBox(height: Get.height * 0.02),
             Text(
               currentQuestion["question"],
-              style: const TextStyle(fontFamily: "Inter", fontSize: 14, fontWeight: FontWeight.w700),
+              style: const TextStyle(fontFamily: "Inter",
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: Get.height * 0.02),
             Expanded(
               child: ListView.builder(
                 itemCount: currentQuestion["options"].length,
@@ -148,24 +166,31 @@ class _QuizScreenState extends State<QuizScreen> {
 
                   return GestureDetector(
                     onTap: () => _selectAnswer(option),
-                    child: OptionCard(option: String.fromCharCode(65 + index), text: option, isSelected: isSelected),
+                    child: OptionCard(option: String.fromCharCode(65 + index),
+                        text: option,
+                        isSelected: isSelected),
                   );
                 },
               ),
             ),
-            //const SizedBox(height: 10,),
             InkWell(
               onTap: () {
                 setState(() {
-                  _showAnswer = !_showAnswer; // Toggle answer visibility
+                  showAnswers[_currentIndex] =
+                  !(showAnswers[_currentIndex] ?? false);
                 });
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    _showAnswer ? "Hide Answer" : "Show Answer",
-                    style: const TextStyle(fontFamily: "Inter", fontSize: 14, fontWeight: FontWeight.w600, color: Colors.blue),
+                    (showAnswers[_currentIndex] ?? false)
+                        ? "Hide Answer"
+                        : "Show Answer",
+                    style: const TextStyle(fontFamily: "Inter",
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.blue),
                   ),
                   const Icon(
                     Icons.arrow_drop_down,
@@ -174,11 +199,11 @@ class _QuizScreenState extends State<QuizScreen> {
                 ],
               ),
             ),
-            if (_showAnswer) ...[
-              const SizedBox(height: 8),
-              const Text(
-                "Answer: All the above",
-                style: TextStyle(
+            if (showAnswers[_currentIndex] ?? false) ...[
+              SizedBox(height: Get.height * 0.01),
+              Text(
+                "Answer: ${currentQuestion["answer"]}",
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.green,
                   fontWeight: FontWeight.w500,
@@ -186,7 +211,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 textAlign: TextAlign.center,
               ),
             ],
-            const SizedBox(height: 10),
+             SizedBox(height: Get.height * 0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -199,7 +224,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       });
                     },
                   ),
-                const SizedBox(width: 8),
+                SizedBox(height: Get.height * 0.01),
                 if (_currentIndex < widget.totalQuestions - 1)
                   CustomButton(
                     label: "Next",
@@ -253,41 +278,41 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 }
+  class OptionCard extends StatelessWidget {
+    final String option;
+    final String text;
+    final bool isSelected;
 
-class OptionCard extends StatelessWidget {
-  final String option;
-  final String text;
-  final bool isSelected;
+    const OptionCard(
+        {super.key, required this.option, required this.text, this.isSelected = false});
 
-  const OptionCard({super.key, required this.option, required this.text, this.isSelected = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: isSelected ? Colors.green : Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-        child: Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: isSelected ? Colors.white : Colors.green,
-              child: Text(
-                option,
-                style: TextStyle(color: isSelected ? Colors.green : Colors.white),
+    @override
+    Widget build(BuildContext context) {
+      return Card(
+        color: isSelected ? Colors.green : Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+          child: Row(
+            children: [
+              CircleAvatar(
+                backgroundColor: isSelected ? Colors.white : Colors.green,
+                child: Text(
+                  option,
+                  style: TextStyle(
+                      color: isSelected ? Colors.green : Colors.white),
+                ),
               ),
-            ),
-            const SizedBox(width: 16),
-            Text(
-              text,
-              style: TextStyle(
-                color: isSelected ? Colors.white : Colors.black,
-                fontSize: 16,
+              const SizedBox(width: 16),
+              Text(
+                text,
+                style: TextStyle(
+                  color: isSelected ? Colors.white : Colors.black,
+                  fontSize: 16,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
-}
-

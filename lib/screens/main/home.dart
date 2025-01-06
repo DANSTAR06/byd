@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test_app_v2/screens/main/topics.dart';
-import 'package:test_app_v2/styles/fonts.dart';
-
+import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
+import 'package:testApp/screens/main/topics.dart';
+import 'package:testApp/styles/fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,27 +12,58 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _seconds = 10;  // Countdown from 10 seconds
-  bool _isBlinking = false;  // To control the blinking effect
+  int _seconds = 10; // Countdown from 10 seconds
+  bool _isBlinking = false; // To control the blinking effect
+  String? _userEmail; // To store the user's email
+  String? _userName;
 
   @override
   void initState() {
     super.initState();
-    // Start the countdown and blinking effect
-    _startCountdown();
+    _getCurrentUser(); // Fetch the user's email
+    _startCountdown(); // Start the countdown and blinking effect
+    _getUserName();
   }
+
+  void _getCurrentUser() {
+    // Fetch the current authenticated user
+    User? user = FirebaseAuth.instance.currentUser;
+    setState(() {
+      _userEmail = user?.email ?? 'User'; // Use 'User' as fallback if no email
+    });
+  }
+
+  //get name from mail
+
+  void _getUserName() {
+    // Fetch the current authenticated user
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user?.email != null) {
+      // Extract username from email (part before '@')
+      setState(() {
+        _userName = user!.email!.split('@')[0];
+        _userName=_userName?.toUpperCase();
+      });
+    } else {
+      // Fallback if no email is found
+      setState(() {
+        _userName = 'User';
+      });
+    }
+  }
+
 
   void _startCountdown() {
     Future.delayed(const Duration(seconds: 1), () {
       if (_seconds > 0) {
         setState(() {
           _seconds--;
-          _isBlinking = !_isBlinking;  // Toggle blinking effect
+          _isBlinking = !_isBlinking; // Toggle blinking effect
         });
-        _startCountdown();  // Keep calling the countdown recursively
+        _startCountdown(); // Keep calling the countdown recursively
       } else {
-        // Redirect to the questions screen after 5 seconds
-        Get.offAll(() => TopicListScreen());
+        // Redirect to the questions screen after countdown
+        Get.to(() => TopicListScreen());
       }
     });
   }
@@ -53,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 40, 2, 40),
+                    padding: const EdgeInsets.fromLTRB(20, 40, 3, 40),
                     child: Image.asset(
                       'assets/images/aalogo.png',
                       width: 60,
@@ -63,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Driving\nTest App',
                     style: TextStyle(
                       fontFamily: 'Inter',
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w900,
                       fontSize: 16,
                       color: Color(0xFF024F31),
                     ),
@@ -73,9 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             // Welcome Text
             SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-            const Text(
-              'Welcome Back User', // Display user name or default text
-              style: TextStyle(
+            Text(
+              'Welcome Back,\t$_userName.', // Display user's email/name
+              style: const TextStyle(
                 fontFamily: 'Inter',
                 fontWeight: FontWeight.w900,
                 fontSize: 18,
@@ -90,7 +121,10 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.04),
             // Countdown Text
             Center(
-              child:  Text('Redirecting in:',style: AppFonts.heading1),
+              child: Text(
+                'Redirecting in:',
+                style: AppFonts.heading1,
+              ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.04),
             Center(

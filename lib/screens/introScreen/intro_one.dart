@@ -5,6 +5,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 
 import 'package:lottie/lottie.dart';
 
+import '../../styles/fonts.dart';
 import '../auth/login.dart';
 
 
@@ -16,7 +17,7 @@ class IntroScreenOne extends StatefulWidget {
 }
 
 class _IntroScreenOneState extends State<IntroScreenOne> {
-  // 1. Define a GlobalKey for IntroductionScreen
+
   final _introKey = GlobalKey<IntroductionScreenState>();
 
   @override
@@ -32,34 +33,34 @@ class _IntroScreenOneState extends State<IntroScreenOne> {
           pages: [
             // Page 1
             PageViewModel(
-              title: "Access verified\ntest materials",
+              title: "Access verified test materials",
               bodyWidget: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Get access to high class driving and \nNTSA test materials approved \nby our competent team to help \nyou ace your driving test.",
+                    "Get access to high class driving and NTSA test materials\n approved by our competent team to help you ace your driving test.",
                     textAlign: TextAlign.center, // Center the text
                     style: TextStyle(
                       fontFamily: 'Inter', // Specify font family (make sure you have this font in assets or Google Fonts)
                       fontWeight: FontWeight.w600, // Font weight 400
                       fontSize: 16, // Font size 17.46px
-                      height: 21.13 / 17.46, // Line height is the ratio (Line height / Font size)
-                      letterSpacing: 0.02, // Letter spacing 2%
+                      height: 21 / 18, // Line height is the ratio (Line height / Font size)
+                      letterSpacing: 0.05, // Letter spacing 2%
                     ),
                   ),
                 ],
               ),
 
               image: Container(
-                margin: const EdgeInsets.only(top: 50.0),
+                margin: const EdgeInsets.only(top: 60.0),
                 child: Align(
                   alignment: const Alignment(-1.8, -4.0), // Position the image using Figma's Top and Left values
                   child: SizedBox(
-                    width: 400, // Set width from Figma
-                    height: 450, // Set height from Figma
+                    width: MediaQuery.of(context).size.width * 3.0, // Set width from Figma
+                    height:MediaQuery.of(context).size.height * 3.6,
                     child: Image.asset(
-                      'assets/images/screenone.png', // Replace with your image path
-                      fit: BoxFit.contain,
+                      'assets/images/sc.png', // Replace with your image path
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
@@ -69,11 +70,11 @@ class _IntroScreenOneState extends State<IntroScreenOne> {
                   fontFamily: 'Inter', // Match with the body font
                   fontWeight: FontWeight.w900, // Match body font weight
                   fontSize: 24,
-                  height: 24.0 / 22.0, // Match body line height ratio
-                  letterSpacing: 0.04, // Match body letter spacing
+                  height: 24.0 / 23.0, // Match body line height ratio
+                  letterSpacing: 0.05, // Match body letter spacing
                   color: Color(0xFF024F31), // Dark green color for the title
                 ),
-                bodyFlex: 2,
+                bodyFlex: 1,
               ),
             ),
             // Page 2
@@ -83,14 +84,14 @@ class _IntroScreenOneState extends State<IntroScreenOne> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Access and attempt simulated \ntest materials that will help you \nput into practice your learnt skills",
+                    "Access and attempt simulated test materials that will help you put into practice your riding skills",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Inter', // Use Inter font
-                      fontWeight: FontWeight.w400, // Font weight 400
+                      fontWeight: FontWeight.w700, // Font weight 400
                       fontSize: 18, // Font size 17.46px
-                      height: 21.13 / 17.46, // Line height based on font size
-                      letterSpacing: 0.02, // Letter spacing 2%
+                      height: 22 / 20, // Line height based on font size
+                      letterSpacing: 0.05, // Letter spacing 5%
                     ),
                   ),
                 ],
@@ -100,11 +101,11 @@ class _IntroScreenOneState extends State<IntroScreenOne> {
                 child: Align(
                   alignment: const Alignment(0.0, 0.0), // Adjust alignment if needed
                   child: SizedBox(
-                    width: 400,
-                    height: 450,
+                    width: MediaQuery.of(context).size.width * 2.0, // Set width from Figma
+                    height:MediaQuery.of(context).size.height * 3.6,
                     child: Image.asset(
-                      'assets/images/screentwo.png', // Replace with the second image asset path
-                      fit: BoxFit.contain,
+                      'assets/images/ride.png', // Replace with the second image asset path
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
@@ -116,30 +117,23 @@ class _IntroScreenOneState extends State<IntroScreenOne> {
                   fontFamily: 'Inter', // Match with the body font
                   fontWeight: FontWeight.w800, // Match body font weight
                   fontSize: 24, // Match body font size
-                  height: 24.0 / 22.0, // Match body line height ratio
+                  height: 28.0 / 26.0, // Match body line height ratio
                   letterSpacing: 0.04, // Match body letter spacing
                   color: Color(0xFF024F31), // Dark green color for the title
                 ),
-                bodyFlex: 2,
+                bodyFlex: 1,
               ),
             ),
             //page 3
             PageViewModel(
-              title: "Test Your Driving Skills",
-              bodyWidget: const Column(
+              title: "\nTest Your Driving Skills",
+              bodyWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "AA Kenya.\n Inspiring Mobility😜",
+                    "With AA Kenya \n\n Champions of Mobility\n\n💪\t🚕",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Inter', // Use Inter font
-                      fontWeight: FontWeight.w700, // Font weight 400
-                      fontSize: 16, // Font size 17.46px
-                      height: 25 / 25, // Line height based on font size
-                      letterSpacing: 0.02, // Letter spacing 2%
-                      color: Color(0xFF024F31),
-                    ),
+                    style: AppFonts.heading1,
                   ),
                 ],
               ),
@@ -148,11 +142,11 @@ class _IntroScreenOneState extends State<IntroScreenOne> {
                 child: Align(
                   alignment: const Alignment(1.7, -4.0), // Adjust alignment if needed
                   child: SizedBox(
-                    width: 400,
-                    height: 450,
+                    width: Get.height * 3.8, // Set width from Figma
+                    height:Get.width *3.60,
                     child: Lottie.asset(
             'assets/anime/dsc.json',
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
                   ),
                 ),
@@ -160,19 +154,19 @@ class _IntroScreenOneState extends State<IntroScreenOne> {
               decoration: const PageDecoration(
                 titleTextStyle: TextStyle(
                   fontFamily: 'Inter', // Match with the body font
-                  fontWeight: FontWeight.w600, // Match body font weight
-                  fontSize: 24, // Match body font size
-                  height: 25.0 / 25.0, // Match body line height ratio
+                  fontWeight: FontWeight.w900, // Match body font weight
+                  fontSize: 20, // Match body font size
+                  height: 20.0 / 20.0, // Match body line height ratio
                   letterSpacing: 0.02, // Match body letter spacing
                   color: Color(0xFF024F31), // Dark green color for the title
                 ),
-                bodyFlex: 2,
+                bodyFlex: 1,
               ),
             ),
           ],
           onDone: () {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              Get.off(() => const LoginSignupPage());
+              Get.to(() =>  const LoginSignupPage());
             });
           },
 
@@ -199,7 +193,7 @@ class _IntroScreenOneState extends State<IntroScreenOne> {
             ),
           ),
 
-          done: const Text("Done", style: TextStyle(fontFamily:'Inter',fontWeight: FontWeight.w600,color: Color(0xFF024F31),fontSize: 18,)),
+          done: const Text("Done", style: TextStyle(fontFamily:'Inter',fontWeight: FontWeight.w600,color: Color(0xFF024F31),fontSize: 20,)),
           dotsDecorator: const DotsDecorator(
             size: Size(10.0, 10.0),
             color: Colors.amberAccent,

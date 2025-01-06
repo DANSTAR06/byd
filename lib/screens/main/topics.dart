@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../widegts/sidebar.dart';
 import 'QuizScreen.dart';
 
 class Topic {
@@ -51,6 +52,7 @@ class TopicListScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => _onWillPop(context),
       child: Scaffold(
+        drawer: UserSidebar(),
         appBar: AppBar(
           title: const Text("Topics"),
           centerTitle: true,
