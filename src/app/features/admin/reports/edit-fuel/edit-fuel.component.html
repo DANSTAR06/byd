@@ -1,0 +1,51 @@
+<div class="card card-success card-outline">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fas fa-calculator"></i>
+        Edit Fuel & Other Parameters
+      </h3>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="row">
+            <div class="col-auto">
+              Petrol
+              <input type="number" class="form-control" [(ngModel)]="petrol" name="petrol"  placeholder="Petrol Price" step=".01">
+            </div>
+            <div class="col-auto">
+              Diesel
+              <input type="number" class="form-control" [(ngModel)]="diasel" name="diasel" placeholder="Diesel Price" step=".01">
+            </div>
+           
+            </div>
+
+            <div class="row">
+              <div class="col-auto thehidden">
+                Oil
+                <input type="number" class="form-control" [(ngModel)]="oil" name="oil"  placeholder="Oil Price" step=".01">
+            </div>
+                <div class="col-auto thehidden">
+                  Services
+                  <input type="number" class="form-control" [(ngModel)]="service" name="service" placeholder="Service Price" step=".01">
+                </div>
+                <div class="col-auto thehidden">
+                  Repairs
+                  <input type="number" class="form-control" [(ngModel)]="repairs" name="repairs" placeholder="Repairs Price" step=".01">
+                </div>
+                <div class="col-auto thehidden">
+                 Tyres & Tubes
+                    <input type="number" class="form-control" [(ngModel)]="tyres" name="tyres" placeholder="Tyres Price" step=".01">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <hr>
+                    <button class="btn btn-outline-success btn-sm" (click)="saveChanges()" ><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+                </div>
+            </div>
+          </form>
+    
+    </div>
+    <!-- /.card -->
+  </div>

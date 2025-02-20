@@ -1,0 +1,52 @@
+.ad-section {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    // background-image: url(../../../assets/webstyle/website/IMG_0055.jpg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .image-item {
+    text-align: center;
+    flex: 1;
+  }
+  
+  .ad-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .banner {
+    margin-top: 10px;
+  }
+  
+  .view-more {
+    display: inline-block;
+    text-decoration: none;
+    color: #ff0000;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    background-color: white;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .view-more:hover {
+    background-color: #ff0000;
+    color: white;
+  }
+  

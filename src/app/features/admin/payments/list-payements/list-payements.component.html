@@ -1,0 +1,159 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a routerLink="/admin">Home</a></li>
+              <li class="breadcrumb-item active">Payements</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+        
+            <div class="card card-warning card-outline">
+              <div class="card-header">
+                <h3 class="card-title" style="width: 100%;">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i> 
+                  Payments List 
+                  <button style="float: right;" class="btn btn-outline-success btn-xs" (click)="openPaymentModal()">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Add</button>
+                 
+                </h3>
+              </div>
+              <div class="card-body">
+                    <div class="card shadow-sm">
+                        <div class="card-header">    
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="d-flex">
+                                  <div class="input-group">
+                                    <span class="input-group-text input-sm">
+                                        Items:
+                                      </span>
+                                  <select 
+                                    [value]="pageSize"
+                                    (change)="onPageSizeChange($event)"
+                                    class="form-select w-auto"
+                                    aria-label="Items per page"
+                                  >
+                                    <option *ngFor="let size of pageSizeOptions" [value]="size">
+                                      {{ size }}
+                                    </option>
+                                  </select>
+                                  </div>
+                                </div>
+                              </div>
+                          <div class="col-md-8">
+                            <div class="input-group">
+
+                              <input 
+                                type="text" 
+                                [value]="searchTerm"
+                                (input)="onSearch($event)"
+                                placeholder="Search payemnt..."
+                                class="form-control"
+                                aria-label="Search users"
+                              >
+                            </div>
+                          </div>
+                         
+                        </div>
+                        </div>
+                  
+                        <div class="card-body">
+                    <!-- Users Table -->
+                        <div class="table-responsive">
+                          <table class="table table-hover table-bordered table-sm">
+                            <thead>
+                              <tr>
+                                <th>No.</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Reference</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Paid By</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Package</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let p of payments let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{ p.date_paid | date:'dd-MM-yyyy'}}</td>
+                                <td>{{ p.mpesa_reference }}</td>
+                                <td>{{ p.amount_paid }}</td>
+                                <td>{{ p.customer }}</td>
+                                <td>{{ p.phone }}</td>
+                                <td>{{ p.subscription}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                  
+                        <!-- No Results Message -->
+                        <div *ngIf="payments.length === 0" class="text-center py-4">
+                          <p class="text-muted mb-0">No payment found</p>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                         <!-- Pagination Controls -->
+                         <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="text-muted">
+                              Showing {{ (currentPage - 1) * pageSize + 1 }} to 
+                              {{ currentPage * pageSize > totalCount ? totalCount : currentPage * pageSize }} 
+                              of {{ totalCount }} entries
+                            </div>
+                            <div class="btn-group">
+                              <button 
+                                (click)="goToPage(currentPage - 1)"
+                                [disabled]="currentPage === 1"
+                                class="btn btn-outline-primary btn-xs"
+                                [class.disabled]="currentPage === 1"
+                              >
+                                <i class="bi bi-chevron-left"></i> Previous
+                              </button>
+                              <button 
+                                class="btn btn-primary btn-xs"
+                              >
+                                {{ currentPage }}
+                              </button>
+                              <button 
+                                (click)="goToPage(currentPage + 1)"
+                                [disabled]="currentPage === totalPages"
+                                class="btn btn-outline-primary btn-xs"
+                                [class.disabled]="currentPage === totalPages"
+                              >
+                                Next <i class="bi bi-chevron-right"></i>
+                              </button>
+                            </div>
+                          </div>
+
+                      </div>
+
+                    </div>
+             
+              </div>
+             
+              <!-- /.card -->
+            </div>
+
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- ./row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

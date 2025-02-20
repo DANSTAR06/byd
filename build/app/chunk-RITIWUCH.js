@@ -1,0 +1,1 @@
+var e={production:!0,appBaseUrl:"http://64.20.41.158:3001/#",apiUrl:"http://64.20.41.158:8006/byd/api/v1",basicPackage:100,premiumPackage:"10000",encryptSecretKey:"AAKenya.Techy.2025",host:"smtppro.zoho.com",username:"aaserver.admin@aakenya.co.ke",password:"2z3snJw4tNXV",secure:"ssl",port:465};export{e as a};

@@ -1,0 +1,55 @@
+.eligibility-container {
+  display: block;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.region-schedule {
+  flex: 1;
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.region-schedule h2 {
+  color: #00644c;
+  margin-bottom: 10px;
+}
+
+.region-schedule ul {
+  list-style: none;
+  padding: 0;
+}
+
+.region-schedule li {
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.eligibility {
+  flex: 2;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.text {
+  margin-top: 20px;
+}
+
+.text div {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.text i {
+  color: #00644c;
+  margin-right: 10px;
+}

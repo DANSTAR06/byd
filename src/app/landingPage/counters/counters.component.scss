@@ -1,0 +1,32 @@
+.counters {
+    // background: #f5f5f5;
+    padding: 50px 0;
+    text-align: center;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .container div {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 150px;
+  }
+  
+  .counter {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  h3 {
+    margin-top: 5px;
+    font-size: 18px;
+  }
+  

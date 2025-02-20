@@ -1,0 +1,98 @@
+<div class="card card-warning card-outline">
+    <div class="card-header">
+      <h3 class="card-title" style="width: 100%;">
+        <i class="fas fa-book"></i>
+        Edit Question
+      </h3>
+    </div>
+    <div class="card-body">
+        <mat-dialog-content class="mat-typography">
+            <div class="p-6 w-full max-w-3xl">
+               
+                <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="w-full">
+                  <!-- Question field -->
+                  <div class="mb-6 w-full">
+                    <mat-form-field class="w-full">
+                      <mat-label>Question</mat-label>
+                      <textarea 
+                        matInput 
+                        formControlName="questions" 
+                        rows="3"
+                        class="w-full"
+                      ></textarea>
+                      <mat-error *ngIf="questionForm.get('questions')?.errors?.['required']">
+                        Question is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+          
+                  <!-- Choices -->
+                  <div formArrayName="choices" class="mb-6">
+                    <div 
+                      *ngFor="let choice of choicesFormArray.controls; let i=index" 
+                      [formGroupName]="i"
+                      class="mb-4 w-full grid grid-cols-10 gap-4">
+                      <!-- Choice input (7 columns = 70%) -->
+                      <div class="col-span-7">
+                        <mat-form-field class="w-full">
+                          <mat-label>Choice {{ i + 1 }}</mat-label>
+                          <input 
+                            matInput 
+                            formControlName="choice"
+                          >
+                          <mat-error *ngIf="choice.get('choice')?.errors?.['required']">
+                            Choice is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      
+                      <!-- Checkbox (3 columns = 30%) -->
+                      <div class="col-span-3 flex items-center">
+                        <mat-checkbox 
+                          formControlName="recommend" 
+                          class="ml-4"
+                        >
+                          Is Correct Answer?
+                        </mat-checkbox>
+                      </div>
+                    </div>
+                  </div>
+
+                  <mat-form-field class="w-full">
+                    <mat-label>Marks</mat-label>
+                    <input 
+                      matInput 
+                      formControlName="marks" 
+                      class="w-full"
+                    >
+                    <mat-error *ngIf="questionForm.get('marks')?.errors?.['required']">
+                      Marks is required
+                    </mat-error>
+                  </mat-form-field>
+          
+                  <!-- Action buttons -->
+                  <div mat-dialog-actions class="flex justify-end gap-4 mt-6">
+                    <button 
+                      mat-button 
+                      type="button" 
+                      (click)="onCancel()"
+                    >
+                      Cancel
+                    </button>
+                    <button 
+                      mat-raised-button 
+                      color="primary" 
+                      type="submit"
+                      [disabled]="questionForm.invalid"
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                </form>
+              </div>
+          </mat-dialog-content>
+    </div>
+    
+   
+    <!-- /.card -->
+  </div>

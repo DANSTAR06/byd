@@ -1,0 +1,75 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a routerLink="/customer">Home</a></li>
+              <li class="breadcrumb-item active">Accounts Settings</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+        
+            <div class="card card-warning card-outline">
+              <div class="card-header">
+                <h3 class="card-title" style="width: 100%;">
+                  <i class="fas fa-users"></i>
+                  Accounts Settings
+                </h3>
+              </div>
+              <div class="card-body">
+  
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <div class="card mb-4">
+                          <div class="card-body text-center">
+                            <img src="assets/dist/img/profile.png" alt="avatar"
+                              class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3">{{userData.names}}</h5>
+                             <p>Email: {{userData.email}}</p>
+                             <p>Phane: {{userData.phone}}</p>
+                            <button class="btn btn-outline-warning btn-xs" (click)="changePassword()">Change Password</button>
+                          </div>
+                        </div>
+                       
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="card mb-4">
+                          <div class="card-body">
+                           <h4 style="width: 100%;">Admin Users Accounts
+
+                            <button style="float: right;" class="btn btn-outline-success btn-xs" (click)="addUser()">Add User</button>
+                           </h4>
+                           ----List Coming Her----
+                           
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                
+              </div>
+              <!-- /.card -->
+            </div>
+  
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- ./row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

@@ -1,0 +1,73 @@
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    //max-width: 1200px;
+   // margin: 0 auto;
+  }
+
+  .card-title{
+    color: green;
+  }
+
+  .category-card {
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+   // text-align: center;
+  }
+
+  .category-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+
+  .category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
+    z-index: 1;
+  }
+
+  .category-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 2;
+    color: white;
+   
+  }
+
+  .category-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .category-description {
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .category-card:hover .category-description {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #city-driving { background: url('/assets/webstyle/bg/2R6A9844.jpg') center/cover; }
+  #highway { background: url('/assets/webstyle/bg/IMG_9811.jpg') center/cover; }
+  #off-road { background: url('/assets/dist/img/d3.jpg') center/cover; }
+  #performance { background: url('/assets/webstyle/bg/IMG_9895.jpg') center/cover; }
+  #eco { background: url('/assets/dist/img/d1.jpg') center/cover; }
+  #defensive { background: url('/assets/dist/img/d3.jpg') center/cover; }
+

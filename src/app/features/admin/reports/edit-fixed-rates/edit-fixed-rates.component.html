@@ -1,0 +1,53 @@
+<div class="card card-warning card-outline">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fas fa-calculator"></i>
+        Edit {{vehicle_type}} of {{car_capacity}} fixed rates
+      </h3>
+    </div>
+    <div class="card-body">
+        <h4>Fuel Type: <span class="badge badge-warning">{{fuel_type}}</span></h4>
+        <form>
+            <div class="row">
+            <div class="col-auto">
+              Petrol (Kms per Litre)
+              <input type="number" class="form-control" [(ngModel)]="kml_petrol" name="kml_petrol"  placeholder="Petrol Price" step=".01">
+            </div>
+            <div class="col-auto">
+              Diesel (Kms per Litre)
+              <input type="number" class="form-control" [(ngModel)]="kml_diesel" name="kml_diesel" placeholder="Diesel Price" step=".01">
+            </div>
+            <div class="col-auto thehidden">
+                Vehicle Value
+                <input type="number" class="form-control" [(ngModel)]="vehicle_value" name="vehicle_value"  placeholder="Oil Price" step=".01">
+            </div>
+           
+            </div>
+
+            <div class="row">
+             
+                <div class="col-auto thehidden">
+                  Services Cost (%)
+                  <input type="number" class="form-control" [(ngModel)]="service_cost" name="service_cost" placeholder="Service Price" step=".01">
+                </div>
+                <div class="col-auto thehidden">
+                  Repairs Cost (%)
+                  <input type="number" class="form-control" [(ngModel)]="repair_cost" name="repair_cost" placeholder="Repairs Price" step=".01">
+                </div>
+                <div class="col-auto thehidden">
+                 Tyres & Tubes (%)
+                    <input type="number" class="form-control" [(ngModel)]="tyres_cost" name="tyres_cost" placeholder="Tyres Price" step=".01">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <hr>
+                    <button class="btn btn-outline-success btn-sm" (click)="saveChanges()" ><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+                </div>
+            </div>
+          </form>
+    
+    </div>
+    <!-- /.card -->
+  </div>

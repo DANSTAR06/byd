@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AA Kenya:: Best Driver Contest</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-icon">
+                    <!-- <i class="fas fa-user"></i> -->
+                    <a routerLink="/bestdrivercontest"><img src="assets/dist/images/logo/byd1.png" style="height:150px;"></a>
+                </div>
+                <h3 style="color: #00644C;">REGISTRATION FORM</h3>
+                <!-- <p class="text-muted">Register to participate in Upcoming Best Driver Contest</p> -->
+            </div>
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="space-y-4">
+                <!-- Personal Information -->
+                 <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="full_name">Full Name</label>
+                      <input type="text" id="full_name" formControlName="full_name" name="full_name" class="form-control">
+                  </div>
+                  <div *ngIf="full_name?.invalid && full_name?.touched" class="error">
+                      Full Name is required
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="national_id">National ID</label>
+                          <input type="text" id="national_id" formControlName="national_id" name="national_id" class="form-control">
+                      </div>
+                      <div *ngIf="national_id?.invalid && national_id?.touched" class="error">
+                          National ID is required
+                        </div>
+                  </div>
+                 </div>
+                 <!-- ============================================ -->
+                 <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="email" id="email" formControlName="email" name="email" class="form-control">
+                      </div>
+                      <div *ngIf="email?.invalid && email?.touched" class="error">
+                          Email required
+                      </div>      
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="phone_number">Phone Number</label>
+                          <input type="tel" id="phone_number" formControlName="phone_number" name="phone_number" class="form-control">
+                      </div>
+                      <div *ngIf="phone_number?.invalid && phone_number?.touched" class="error">
+                          Phone Number Required
+                      </div>
+                  </div>
+                 </div>
+                 <!-- ============================================ -->
+                 <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="gender">Gender</label>
+                          <select id="gender" formControlName="gender" name="gender" class="form-control">
+                              <option value="">Select Gender</option>
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                          </select>
+                      </div>
+                      <div *ngIf="gender?.invalid && gender?.touched" class="error">
+                          Gender Required
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="dob">Date of Birth</label>
+                          <input type="date" id="dob" name="dob" formControlName="dob" class="form-control">
+                      </div>
+                      <div *ngIf="dob?.invalid && dob?.touched" class="error">
+                          Date of Birth Required
+                      </div>
+
+                  </div>
+                 </div>
+                 <!-- ============================================ -->
+                 <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="region_id">Preferred Region</label>
+                          <select id="region_id" formControlName="region_id" name="region_id" class="form-control">
+                              <option value="">---Select---</option>
+                              <option value=1>Nairobi</option>
+                              <option value=2>Nakuru</option>
+                              <option value=3>Kisumu</option>
+                              <option value=4>Eldoret</option>
+                              <option value=5>Mombasa</option>
+                              <option value=6>Nyeri</option>
+                          </select>
+                      </div>
+                      <div *ngIf="region_id?.invalid && region_id?.touched" class="error">
+                          Region Required
+                      </div>
+
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="dl_no">Driver's License Number</label>
+                          <input type="text" id="dl_no" name="dl_no" formControlName="dl_no" class="form-control">
+                      </div>
+                      <div *ngIf="dl_no?.invalid && dl_no?.touched" class="error">
+                          Driver's License Number Required
+                      </div>
+
+                  </div>
+                 </div>
+                 <!-- ============================================ -->
+                 <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="knowhow_id">How did you know about this Event?</label>
+                            <select id="knowhow" formControlName="knowhow" name="knowhow" class="form-control">
+                               <option>---Select---</option> 
+                               <option>AA Kenya Website</option>
+                               <option>I am a past participant</option>
+                               <option>AA Kenya Employee</option>
+                               <option>Friend/Family Refarral</option>
+                               <option>Social Media</option>
+                   
+                            </select>
+                        </div>
+                        <div *ngIf="region_id?.invalid && region_id?.touched" class="error">
+                            Region Required
+                        </div>
+  
+                    </div>
+                    </div>
+                  <!-- ============================================ -->
+                 <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="password">Create Password</label>
+                          <input type="password" id="password" formControlName="password" name="password" class="form-control">
+                      </div>
+                      <div *ngIf="password?.invalid && password?.touched" class="error">
+                          Password Required | min 6 characters 
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="password">Confirm Password</label>
+                          <input type="password" id="password1" formControlName="password1" class="form-control">
+                      </div>
+                      <div *ngIf="password1?.invalid && password1?.touched" class="error">
+                          Confirmation Password Required | min 6 characters
+                      </div>
+                  </div>
+                 </div>    
+             
+    
+            <!-- Document Uploads -->
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                    <label for="dl_image">Driver's License Image</label>
+                    <input type="file" id="dl_image" (change)="onDLImageSelected($event)" 
+                           accept="image/*" class="form-control">
+                </div>
+                </div>
+                <div class="col-6"> 
+                <div class="form-group">
+                    <label for="id_image">ID Image</label>
+                    <input type="file" id="id_image" (change)="onIDImageSelected($event)" 
+                           accept="image/*" class="form-control">
+                </div>
+            </div>
+            </div>
+            
+
+            <div class="row">
+              <div class="col-12">
+                <div class="icheck-primary">
+                  <input type="checkbox" id="agreeTerms" name="terms" value="agree" [formControl]="termsControl">
+                  <label for="agreeTerms">
+                   I agree to the <a href="#">terms & Conditions</a>
+                  </label>
+                </div>
+              </div>
+              </div>
+    
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="text-red-500">
+                {{ errorMessage }}
+            </div>
+    
+            <!-- Submit Button -->
+            <button type="submit" 
+                    [disabled]="!registrationForm.valid || !dlImageFile || !idImageFile || loading"
+                    class="btn btn-login btn-success">
+                {{ loading ? 'Registering...' : 'Register' }}
+            </button>
+        </form>
+
+
+            <div class="register-link">
+                <p class="mb-0">I already have an account <a routerLink="/login" class="text-decoration-none">Login</a></p>
+            </div>
+            <br>
+        <h6 style="width: 100%;text-align: center;">Copyright &copy; 2025 <a style="color: #006544;" href="https://www.aakenya.co.ke" target="_blank">AA Kenya</a>. All rights reserved.</h6>
+        </div>
+        
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

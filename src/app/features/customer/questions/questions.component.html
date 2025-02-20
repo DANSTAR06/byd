@@ -1,0 +1,210 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a routerLink="/customer">Home</a></li>
+              <li class="breadcrumb-item active"><a routerLink="/customer">Theory Assesment</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+          
+              <div class="card card-warning card-outline">
+                <div class="card-header">
+                  <h3 class="card-title" style="width: 100%;">
+                    <i class="fa fa-edit"></i>
+                    Online Theory Assesment 
+                    <span class="badge badge-info" style="float: right;" *ngIf="numberOfSubmissions == 0">First Attemp</span>
+                    <span class="badge badge-info" style="float: right;" *ngIf="numberOfSubmissions == 1">Second Attemp</span>
+                    <span class="badge badge-info" style="float: right;" *ngIf="numberOfSubmissions == 2">Third & Final Attemp</span>
+                  </h3>
+                </div>
+                <div class="card-body">
+                     <!-- ============================================================================== -->
+                      <div class="status-container" *ngIf="submitting == true">
+                        <mat-progress-bar mode="indeterminate"></mat-progress-bar><br>
+                        <h5>Submitting the task... please wait</h5>
+                        {{timeCount}}/{{pagination.total_items}}
+                      </div>
+                      <!-- ================================================================================== -->
+                      <div class="results-container" *ngIf="answers.length > 0">
+                        <div class="results-header">
+                          <h2>Quiz Results</h2>
+                        </div>
+                      
+                        <div class="loading-error-container">
+                          <div *ngIf="loadingResults" class="loading">Loading results...</div>
+                          <div *ngIf="error" class="error">{{error}}</div>
+                        </div>
+                      
+                        <div class="score-summary" *ngIf="!loadingResults && !error">
+                          <div class="score-card">
+                            <div class="score-title">Total Score</div>
+                            <div class="score-value" [style.color]="getScoreColor()" *ngIf="getScorePercentage() >= 50">
+                              {{scoredMarks}} / {{totalMarks}}
+                            </div>
+                            <div class="score-percentage" [style.color]="getScoreColor()" *ngIf="getScorePercentage() >= 50">
+                             [ {{getScorePercentage() | number:'1.0-0'}}% ]
+                            </div>
+
+                            <div class="score-value" style="color: red;" *ngIf="getScorePercentage() < 50">
+                              {{scoredMarks}} / {{totalMarks}}
+                            </div>
+                            <div class="score-percentage" style="color: red;" *ngIf="getScorePercentage() < 50">
+                              [ {{getScorePercentage() | number:'1.0-0'}}% ]
+                             </div>
+                            <hr>
+                            <div class="alert alert-success" role="alert" *ngIf="getScorePercentage() >= 50">
+                            <b>Congratulation!</b><br> You have qualified for the next round of this competition.<br> 
+                            Thank you for taking the test. We will be in touch. <br>For any enquiries kindly contact 0709933100 / 0709933790
+                            </div>
+
+                            <div class="alert alert-warning" role="alert" *ngIf="getScorePercentage() < 50 && numberOfSubmissions < 2">
+                              Sorry! You didn't achieve 50% and above which is the minmum requirement  for participating in Best Driver Challange.<br> You can retake the assesment to score the required entry marks<br>
+                              <button (click)="retakeAssesment()" class="btn btn-light" style="color: red;"><i class="nav-icon fas fa-edit"></i> Retake the Assesment</button>
+                            </div>
+
+                            <div class="alert alert-warning" role="alert" *ngIf="getScorePercentage() < 50 && numberOfSubmissions >= 2">
+                              Sorry! After take the assesment for Three times, You didn't achieve 50% and above which is the minmum requirement for participating in Best Driver Challange.<br> Thank you for tahing your time<br>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        <div class="answers-container" *ngIf="!loading && !error">
+                          <div class="answer-card" *ngFor="let answer of answers; let i = index">
+                            <div class="answer-header">
+                              <span class="question-number">Question {{i + 1}}</span>
+                              <span class="marks-badge" [class.correct]="answer.verdict">
+                                {{answer.verdict ? '+' : '-'}}/{{answer.marks}} marks
+                              </span>
+                            </div>
+                      
+                            <div class="question-text">{{answer.question}}</div>
+                            
+                            <div class="answer-section">
+                              <div class="answer-text">
+                                <span class="answer-label">Your Answer:</span>
+                                {{answer.answer}}
+                              </div>
+                              
+                              <div class="verdict-icon" [class.correct]="answer.verdict">
+                                <ng-container *ngIf="answer.verdict">
+                                  <i class="fa fa-check" aria-hidden="true" style="color: green;font-size: 1.5em;"></i>
+      
+                                </ng-container>
+                                <ng-container *ngIf="!answer.verdict">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                                  </svg>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                       <!-- ======================================================================================== -->
+                     <div class="quiz-container" *ngIf="submitting == false && answers.length < 1">
+                        <div class="quiz-header">
+                          <h3>Please Answer all the questions and <b>submit</b> your work</h3>
+                          <!-- <div class="pagination-info">
+                            Page {{pagination.current_page}} of {{pagination.total_pages}}
+                          </div> -->
+                        </div>
+                      
+                        <div class="loading-error-container">
+                          <div *ngIf="loading" class="loading">Loading questions...</div>
+                          <div *ngIf="error" class="error">{{error}}</div>
+                        </div>
+                      
+                        <div class="questions-container" *ngIf="!loading && !error">
+                          <div class="question-card" *ngFor="let question of questions">
+                            <div class="question-header">
+                              <span class="question-number">Question {{question.quiz_id}}</span>
+                              <!-- <span class="marks">[{{question.marks}} marks]</span> -->
+                              Question {{pagination.current_page}} of {{pagination.total_pages}}
+                            </div>
+                            
+                            <p class="question-text">{{question.questions}} [{{question.marks}} marks]</p>
+                      
+                            <div class="choices-container">
+                              <div 
+                                *ngFor="let choice of question.choices"
+                                class="choice-item"
+                                [class.selected]="isAnswerSelected(question.quiz_id, choice.choice_id)"
+                                (click)="onAnswerSelected(question.quiz_id, choice.choice_id)"
+                              >
+                                <div class="choice-radio">
+                                  <div class="radio-inner" *ngIf="isAnswerSelected(question.quiz_id, choice.choice_id)"></div>
+                                </div>
+                                <span class="choice-text">{{choice.choice}}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        <div class="pagination-controls" *ngIf="!loading && !error">
+                          <button 
+                            class="btn btn-success"
+                            [disabled]="pagination.current_page === 1"
+                            (click)="goToPage(pagination.current_page - 1)"
+                          >
+                          <i class="fa fa-chevron-left" aria-hidden="true"></i> Previous
+                          </button>
+                          
+                          <div class="page-numbers">
+                            <button 
+                              *ngFor="let page of [].constructor(pagination?.total_pages); let i = index"
+                              class="page-number"
+                              [class.active]="pagination.current_page === i + 1"
+                              (click)="goToPage(i + 1)"
+                            >
+                              {{i + 1}}
+                            </button>
+                          </div>
+                      
+                          <button 
+                            class="btn btn-success"
+                            [disabled]="pagination.current_page === pagination.total_pages"
+                            (click)="goToPage(pagination.current_page + 1)"
+                          >
+                            Next <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                          </button>
+                        </div>
+                         <hr>
+                         <h6 style="width: 100%;text-align: center;">
+                        <button 
+                        class="btn btn-outline-success"
+                        (click)="onSubmit()"
+                      >
+                        Submit Quiz
+                      </button>
+                      </h6>
+                      </div>
+                     
+                   
+                      <!-- ================================================================================ -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- ./row -->
+        </div><!-- /.container-fluid -->
+      </section>
+  </div>
+  <!-- /.content-wrapper -->

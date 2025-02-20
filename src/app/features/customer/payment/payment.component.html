@@ -1,0 +1,141 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a routerLink="/customer">Home</a></li>
+              <li class="breadcrumb-item active"><a routerLink="/customer">Payments</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+          
+              <div class="card card-warning card-outline">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="fa fa-edit"></i>
+                    Registration Fee Payment
+                  </h3>
+                </div>
+                <div class="card-body">
+                     <!-- ============================================================================== -->
+                     <table class="table table-borderless">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Category Selected</th>
+                            <td>:</td>
+                            <td>{{categoryName}}</td>
+                            <td>
+                                <button *ngIf="this.categoryFees - applicantTotalPayment > 0" class="btn btn-outline-warning btn-xs" (click)="changeCategory()">Change Category</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Registration Fees</th>
+                            <td>:</td>
+                            <td><b><u>{{categoryFees | currency: 'KES'}}</u></b></td>
+                            <td>Paid: <b style="color: green;">{{applicantTotalPayment}}</b> || Bal: <b style="color: red;"><u>{{this.categoryFees - applicantTotalPayment | currency: 'KES'}}</u></b></td>
+                           
+                          </tr>
+                        </tbody>
+                      </table>
+                      <hr>
+                      <div class="payment-div" *ngIf="this.categoryFees - applicantTotalPayment <= 0" style="text-align: center;">
+                        You registration fee for this application has been received. Please proceed to assesment stage<br><br>
+                        <button (click)="goToAssesment()" class="btn btn-outline-success">Take Assesment</button>
+                      </div>
+                      <div class="payment-div" *ngIf="this.categoryFees - applicantTotalPayment > 0">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <h4 style="color: green;"><i class="fa fa-credit-card" aria-hidden="true"></i> How to pay:-</h4>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- ================================================================== push -->
+                                <div class="card">
+                                    <div class="card-header">
+                                     <b>Method 1: Mpesa STK Prompt</b>
+                                    </div>
+                                    <div class="card-body">
+                                      <form>
+                                        <label>Enter Mpesa Number</label>
+                                        <input style="color: goldenrod;" type="number" id="phone" name="phone" [(ngModel)]="phone" class="form-control" required>
+                                       </form>
+                                    </div>
+                        
+                                    <div class="card-footer">
+                                      <div class="progressing" *ngIf="isIntiating == true">
+                                   
+                                       <div class="spinner-grow text-warning" role="status">
+                                           <span class="sr-only">Loading...</span>
+                                         </div>
+                                         <div class="spinner-grow text-secondary" role="status">
+                                           <span class="sr-only">Loading...</span>
+                                         </div>
+                                         <div class="spinner-grow text-success" role="status">
+                                           <span class="sr-only">Loading...</span>
+                                         </div>
+                                         <br>
+                                         Initiating Mpesa STK...
+                                        </div>
+                               
+                                        <div class="payment-waitin" *ngIf="isWaitingPayment == true">
+                                           Mpesa STK Intiated. <br>Please check phone {{phone}} to complete the payment<br>
+                                           <button type="button" class="btn btn-outline-warning btn-sm btn-open" (click)="payNow(this.categoryFees - this.applicantTotalPayment)"><i class="fa fa-refresh" aria-hidden="true"></i> Retry</button>
+                                           <button type="button" class="btn btn-outline-success btn-sm btn-closes" (click)="completePayment()" mat-dialog-close style="float: right;"><i class="fa fa-ok" aria-hidden="true"></i><i class="fa fa-check" aria-hidden="true"></i> Completed</button>
+                                         </div>
+                                        <div class="footer-button" *ngIf="isIntiating == false && isWaitingPayment == false">   
+                                       <button type="button" class="btn btn-outline-warning btn-sm" (click)="payNow(this.categoryFees - this.applicantTotalPayment)"><i class="fa fa-credit-card" aria-hidden="true"></i> Pay</button>
+                                       <button type="button" class="btn btn-outline-danger btn-sm btn-closes" mat-dialog-close style="float: right;"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Cancel</button>
+                                       </div>
+                                   </div>
+                                    </div>  
+                                <!-- ================================================================== -->
+
+                            </div>
+                            <div class="col-sm-6">
+                               <div class="card">
+                                <div class="card-header">
+                                 <b>Method 2: Lipa Na Mpesa</b>
+                                </div>
+                                <div class="card-body">
+                                  <ol>
+                                    <li>Go to Lipa Na Mpesa</li>
+                                    <li>Enter Paybill Number: <b>927137</b></li>
+                                    <li>Enter Acount Number: <b>{{packageType}}{{this.userId}}</b></li>
+                                    <li>Enter Amount: <b>{{this.categoryFees - this.applicantTotalPayment}}</b></li>
+                                    <li>Enter PIN</li>
+                                  </ol>
+                                  <button type="button" class="btn btn-outline-success btn-sm btn-closes" (click)="completePayment()" mat-dialog-close style="float: right;"><i class="fa fa-ok" aria-hidden="true"></i><i class="fa fa-check" aria-hidden="true"></i> Completed?</button>
+                                 </div>
+                                 </div> 
+                    
+                                
+                            </div>
+                        </div>
+
+                      </div>
+                  
+                      <!-- ================================================================================ -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- ./row -->
+        </div><!-- /.container-fluid -->
+      </section>
+  </div>
+  <!-- /.content-wrapper -->

@@ -1,0 +1,84 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+
+            <!-- <h5 style="font-size: 16px; text-align: center; color: #00644C;"></h5> -->
+            
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a>Home</a></li>
+              <li class="breadcrumb-item active"><a>Online Test</a></li>
+              <li class="breadcrumb-item active"><a routerLink="/bestdrivercontest">website</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+          
+              <div class="card card-warning card-outline">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="fa fa-edit"></i>
+                    Hello {{currenntUser?.email}}😊 Please Start by selecting the category🚕you want to Contest
+                  </h3>
+                </div>
+                <div class="card-body">
+                     <!-- ============================================================================== -->
+                    
+                     <div class="category-container">
+                      <div class="category-card" id="city-driving" (click)="selectCategory('1','Best Young Driver',18,26,500,'BYDA','Both')">
+                        <div class="category-content">
+                          <h3 class="category-title">The Best Young Driver</h3>
+                          <button class="btn btn-outline-warning btn-sm btn-block">Select</button>
+                          <p class="category-description">18-26 Years</p> | <span class="badge badge-success">Registration: KES500</span>
+                        </div>
+                      </div>
+
+                      <div class="category-card" id="eco">
+                        <div class="category-content" (click)="selectCategory('2','The Ladies-only Driver Contest',26,200, 1000,'BYDE','Female')">
+                          <h3 class="category-title">The Ladies-only Driver Contest</h3>
+                          <button class="btn btn-outline-warning btn-sm btn-block">Select</button>
+                          <p class="category-description"> ladies over 26 years </p> | <span class="badge badge-success">Registration: KES1,000</span>
+                        </div>
+                      </div>
+                      
+                      <div class="category-card" id="off-road">
+                        <div class="category-content" (click)="selectCategory('3','The Masters Driver Contest',36,50,1000,'BYDC','Both')">
+                          <h3 class="category-title">The Masters Driver Contest</h3>
+                          <button class="btn btn-outline-warning btn-sm btn-block">Select</button>
+                          <p class="category-description">27 – 50 years </p> | <span class="badge badge-success">Registration: KES1,000</span>
+                        </div>
+                      </div>
+                
+                      <div class="category-card" id="performance">
+                        <div class="category-content" (click)="selectCategory('4','The Legends Driver Contest',50,200, 1000,'BYDD','Both')">
+                          <h3 class="category-title">The Legends Driver Contest</h3>
+                          <button class="btn btn-outline-warning btn-sm btn-block">Select</button>
+                          <p class="category-description">Above 50 years </p> | <span class="badge badge-success">Registration: KES1,000</span>
+                        </div>
+                      </div>
+              
+                
+                    </div>
+                   
+                      <!-- ================================================================================ -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- ./row -->
+        </div><!-- /.container-fluid -->
+      </section>
+  </div>
+  <!-- /.content-wrapper -->

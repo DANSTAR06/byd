@@ -1,0 +1,11 @@
+
+  <section class="counters">
+    <div class="container">
+      <div *ngFor="let counter of counters">
+        <fa-icon [icon]="counter.icon" class="icon"></fa-icon>
+        <div class="counter" [attr.data-target]="counter.target">0</div>
+        <h3>{{ counter.label }}</h3>
+      </div>
+    </div>
+  </section>
+  

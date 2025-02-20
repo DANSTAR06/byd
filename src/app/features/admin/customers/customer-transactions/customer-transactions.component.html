@@ -1,0 +1,78 @@
+
+      <div class="card card-warning card-outline card-outline-tabs">
+        <div class="card-header p-0 border-bottom-0">
+          <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true"><i class="fa fa-credit-card" aria-hidden="true"></i> {{customerName}} Payments</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false"><i class="fa fa-calculator" aria-hidden="true"></i> {{customerName}} Reports</a>
+            </li>
+          
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="custom-tabs-four-tabContent">
+            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                <h6 *ngIf="customerReports == null">{{customerName}} do NOT have any Calculated Mileage Rate Report</h6>
+                <div class="table-responsive" *ngIf="customerReports != null">
+                  <table class="table table-hover table-bordered table-sm">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Reference</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Package</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let p of payments let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{ p.date_paid }}</td>
+                        <td>{{ p.mpesa_reference }}</td>
+                        <td>{{ p.amount_paid }}</td>
+                        <td>{{ p.subscription}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+     
+                   </div> 
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Vehicle</th>
+                          <th>Expiry Date</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let c of customerReports let i=index">
+                          <td>{{i+1}}</td>
+                          <td>{{c.vehicle_type}}</td>
+                          <td>{{c.expiry_date}}</td>
+                          <!-- <td>
+                            <button type="button" class="btn btn-outline-danger btn-sm" ><i class="fa fa-pdf" aria-hidden="true"></i> Download</button>
+                          </td> -->
+                          <td>
+          
+                            <span class="badge badge-danger" *ngIf="isExpired(c.expiry_date)">Expired</span>
+                            <!-- <span class="badge badge-success" *ngIf="!isExpired(c.expiry_date)">Active</span> -->
+                            <button *ngIf="!isExpired(c.expiry_date)" class="btn btn-outline-success btn-sm" (click)="viewReport(c.capacity,c.vehicle_type,c.model_type,c.fuel_type,c.car_age,c.total_running_cost,c.expiry_date,c.id,c.date_created)"> View</button>
+                          </td>
+                        </tr>
+                     
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+            
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+  

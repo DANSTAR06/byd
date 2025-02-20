@@ -1,0 +1,141 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a routerLink="/admin">Home</a></li>
+              <li class="breadcrumb-item active">Customers</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+        
+            <div class="card card-warning card-outline">
+              <div class="card-header">
+                <h3 class="card-title" style="width: 100%;">
+                  <i class="fas fa-book"></i>
+                  Questions List
+
+                  <button class="btn btn-outline-success btn-sm" style="float: right;" (click)="addQuestion()">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Question
+                </button>
+                 
+                </h3>
+              </div>
+              <div class="card-body">
+                    <div class="card shadow-sm">
+                        <div class="card-header">    
+                            <div class="mb-4 flex items-center">
+                                <label for="pageSize" class="mr-2">Items:</label>
+                                <select 
+                                  id="pageSize" 
+                                  [(ngModel)]="pageSize"
+                                  (change)="onPageSizeChange()"
+                                  class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                  <option *ngFor="let size of pageSizeOptions" [value]="size">
+                                    {{ size }}
+                                  </option>
+                                </select>
+
+                                <span style="float: right;">
+                                    All Questions: {{ pagination?.total_items }} || Total Marks: {{calculateTotalMarks()}}
+                                </span>
+                              </div>
+                        </div>
+                  
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                  <thead>
+                                    <tr>
+                                      <th >Question Number</th>
+                                      <th >Question</th>
+                                      <th>Choices</th>
+                                      <th>Actions</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let question of questions; let i = index">
+                                      <td >{{ question.quiz_id }}</td>
+                                      <td >{{ question.questions }} [{{question.marks}} Marks]</td>
+                                      <td >
+                                        <ul>
+                                        <div *ngFor="let choice of question.choices" >
+                                          <span *ngIf="choice.recommend" style="color: green;">
+                                          <li> <b> {{ choice.choice }} <i class="fa fa-check" aria-hidden="true"></i></b></li>
+                                          </span>
+                                          <span *ngIf="choice.recommend == false">
+                                          <li>  {{ choice.choice }}</li>
+                                          </span>  
+                                         
+                                        </div>
+                                        </ul>
+                                      </td>
+                                      <td>
+                                        <button 
+                                          (click)="onEdit(question)"
+                                          class="btn btn-outline-danger btn-xs">
+                                          <i class="nav-icon fa fa-edit"></i> Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                          
+                               
+                              </div>
+                        
+                      </div>
+                      <div class="card-footer">
+                        <div class="mt-4 flex justify-between items-center">
+                            <div class="flex gap-2">
+                              <button 
+                                [disabled]="currentPage === 1"
+                                (click)="loadPage(currentPage - 1)"
+                                class="px-4 py-2 border rounded"
+                                [ngClass]="{'opacity-50': currentPage === 1}">
+                                Previous
+                              </button>
+                              <span class="px-4 py-2">
+                                Page {{ currentPage }} of {{ pagination?.total_pages }}
+                              </span>
+                              <button 
+                                [disabled]="currentPage === pagination?.total_pages"
+                                (click)="loadPage(currentPage + 1)"
+                                class="px-4 py-2 border rounded"
+                                [ngClass]="{'opacity-50': currentPage === pagination?.total_pages}">
+                                Next
+                              </button>
+                            </div>
+                          </div>
+
+                      </div>
+
+                    </div>
+             
+              </div>
+             
+              <!-- /.card -->
+            </div>
+
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- ./row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

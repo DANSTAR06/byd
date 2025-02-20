@@ -1,0 +1,120 @@
+<div class="card card-warning card-outline">
+    <div class="card-header">
+      <h3 class="card-title" style="width: 100%;">
+        <i class="fas fa-book"></i>
+        Add A Question
+      </h3>
+    </div>
+    <div class="card-body">
+        <mat-dialog-content class="mat-typography">
+        <!-- <div class="container mt-4 questions-card"> -->
+            <div class="card questions-card">
+             
+              <div class="card-body">
+                <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+                  <!-- Question Input -->
+                  <div class="mb-3">
+                    <label for="question" class="form-label">Question</label>
+                    <textarea 
+                      id="question"
+                      class="form-control"
+                      rows="3"
+                      formControlName="question"
+                      placeholder="Type your question here..."
+                    ></textarea>
+                    <div class="text-danger" *ngIf="questionForm.get('question')?.touched && questionForm.get('question')?.hasError('required')">
+                      Question is required
+                    </div>
+                  </div>
+      
+                  <!-- Choices -->
+                  <div formArrayName="choices">
+                    <div *ngFor="let choice of choices.controls; let i=index" [formGroupName]="i" class="mb-3">
+                      <div class="row align-items-center">
+                        <div class="col">
+                          <input 
+                            type="text" 
+                            class="form-control"
+                            [placeholder]="'Choice ' + (i + 1)"
+                            formControlName="text"
+                            [id]="'choice-' + i"
+                          >
+                          <div class="text-danger" *ngIf="choice.get('text')?.touched && choice.get('text')?.hasError('required')">
+                            Choice text is required
+                          </div>
+                        </div>
+                        <div class="col-auto">
+                          <div class="form-check">
+                            <input 
+                              type="checkbox" 
+                              class="form-check-input" 
+                              formControlName="isCorrect"
+                              [id]="'choice-correct-' + i"
+                              (change)="onChoiceCheckChange()"
+                            >
+                            <label class="form-check-label" [for]="'choice-correct-' + i">
+                              Is Correct?
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="question" class="form-label">Marks</label>
+                    <input
+                    type="number" 
+                      id="marks"
+                      class="form-control"
+                      rows="3"
+                      formControlName="marks"
+                      value="2"
+                     
+                    >
+                    <div class="text-danger" *ngIf="questionForm.get('marks')?.touched && questionForm.get('marks')?.hasError('required')">
+                      Marks required
+                    </div>
+                  </div>
+      
+      
+                  <!-- Submit Button -->
+                  <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary" [disabled]="!questionForm.valid">
+                      Save Question
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-sm btn-closes" mat-dialog-close><i class="fa fa-times" aria-hidden="true"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+      
+            <!-- Preview Section -->
+            <div class="card mt-4" *ngIf="submittedQuestion">
+              <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Preview</h4>
+              </div>
+              <div class="card-body">
+                <h5>{{submittedQuestion.question}}</h5>
+                <div class="list-group mt-3">
+                  <div *ngFor="let choice of submittedQuestion.choices" class="list-group-item">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <span>{{choice.text}}</span>
+                      <i 
+                        class="bi" 
+                        [class.bi-check-circle-fill]="choice.isCorrect"
+                        [class.bi-circle]="!choice.isCorrect"
+                        [class.text-success]="choice.isCorrect"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+          </mat-dialog-content>
+   
+    </div>
+   
+    <!-- /.card -->
+  </div>

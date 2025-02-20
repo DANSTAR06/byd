@@ -1,0 +1,44 @@
+<!-- <section class="video-gallery">
+    <div class="video-container">
+        
+      <video 
+        *ngFor="let video of videos" 
+        class="video" 
+        [attr.src]="video.src" 
+        [attr.type]="video.type" 
+        autoplay 
+        loop 
+        muted
+        playsinline>
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    
+  </section> -->
+
+
+  <section class="video-gallery">
+    
+   
+    <video 
+      #videoPlayer 
+      [src]="videos[currentVideoIndex]" 
+      autoplay 
+      muted 
+      loop
+      (ended)="playNextVideo()" 
+      controls>
+    </video>
+  
+    <!-- <div class="controls">
+      <button (click)="prevVideo()">
+        <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon> Previous
+      </button>
+      <button (click)="nextVideo()">
+        Next <fa-icon [icon]="['fas', 'arrow-right']"></fa-icon>
+      </button>
+    </div> -->
+
+  </section>
+  
+  

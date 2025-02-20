@@ -1,0 +1,67 @@
+<!-- <section class="eligibility">
+    <div class="section-head">
+      <h1>
+        <fa-icon [icon]="['far', 'check-circle']"></fa-icon>Requirements
+      </h1>
+    </div>
+  
+    
+     
+
+      <div class="text" style="text-align:left;margin:0 0 10px;">
+                                
+        <i class="fas fa-check align-middle" style="font-size: 2.0rem;"></i> Be of Age 18years and Above.<br>
+        <i class="fas fa-check align-middle" style="font-size: 2.0rem;"></i>Have a valid driving Lencense(Class B Vehicle)<br>
+        <i class="fas fa-check align-middle" style="font-size: 2.0rem;"></i>Be free of conviction of serious road offense like death or serious injury of other road users<br>
+        <i class="fas fa-check align-middle" style="font-size: 2.0rem;"></i>Be Kenyan or Oficial resident of Kenya<br>
+        <i class="fas fa-check align-middle" style="font-size: 2.0rem;"></i>Not be a winner form previous similar or participant in the previous year's finals<br>
+        <i class="fas fa-check align-middle" style="font-size: 2.0rem;"></i>Pay the Registration Fees as per the category you want to participate <br>
+</div>
+    
+  </section> -->
+
+
+
+
+  <section class="eligibility-container">
+  
+    <!-- Right: Eligibility Requirements -->
+    <div class="eligibility">
+      <div class="section-head">
+        <h1>
+          <span class="section-head icon far fa-check-circle"></span> Requirements
+        </h1>
+      </div>
+      <div class="text">
+        <div *ngFor="let requirement of requirements">
+          <i class="fas fa-check align-middle"></i> {{ requirement }}
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+    <!-- Left: Region Schedule -->
+    <br><div class="container">
+      <div class="row align-items-center">
+        <!-- Left Side: Region Schedule -->
+        <div class="col-md-6">
+          <div class="region-schedule">
+            <h2>Region Schedule</h2>
+            <ul>
+              <li *ngFor="let event of schedule">
+                <strong>{{ event.location }}</strong> - {{ event.date }}
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        <!-- Right Side: Image -->
+        <div class="col-md-6 text-center">
+          <img src="../../../assets/webstyle/website/IMG_0055.jpg" alt="Schedule Image" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  
+  

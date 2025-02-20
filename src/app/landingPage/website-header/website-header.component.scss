@@ -1,0 +1,123 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 16px;
+    background: #00644C;
+    color: #f7d839;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(9, 8, 10, 0.1); 
+
+    .logo img {
+        width: 180px;
+        height: 200px; 
+        object-fit: contain; 
+        position: fixed;
+        left: 2rem;
+        top: -1rem;
+    }
+
+    .menu-toggle {
+        font-size: 24px;
+        cursor: pointer;
+        display: none;
+    }
+
+    .navbar {
+        ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                position: relative;
+                margin: 0 10px;
+
+                a {
+                    text-decoration: none;
+                    color: white;
+                    padding: 10px 15px;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    transition: 0.3s ease-in-out;
+
+                    &:hover {
+                        background: #f7d839;
+                        border-radius: 5px;
+                    }
+                }
+
+                // Dropdown styles
+                &.dropdown {
+                    .dropdown-menu {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: #004d3a;
+                        display: none;
+                        flex-direction: column;
+                        min-width: 180px;
+                        border-radius: 5px;
+                        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                        
+                        li {
+                            margin: 0;
+                            a {
+                                width: 100%;
+                                display: flex;
+                                padding: 10px 15px;
+                            }
+                        }
+                    }
+
+                    &:hover .dropdown-menu {
+                        display: flex;
+                    }
+                }
+            }
+        }
+    }
+
+    // Responsive menu
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: #004d3a;
+            flex-direction: column;
+            display: none;
+
+            &.active {
+                display: flex;
+            }
+
+            ul {
+                flex-direction: column;
+
+                li {
+                    margin: 0;
+                    text-align: center;
+                    width: 100%;
+
+                    .dropdown-menu {
+                        position: static;
+                        box-shadow: none;
+                        background: #00644C;
+                    }
+                }
+            }
+        }
+    }
+}

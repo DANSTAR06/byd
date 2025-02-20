@@ -1,0 +1,43 @@
+<div class="login-box hold-transition login-page">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-warning">
+      <div class="card-header text-center">
+        <img src="assets/dist/img/logoo.png">
+        <h3 class="mileage-heading">Mileage Rate Calculator</h3>
+      </div>
+      <div class="card-body" style="text-align: center;">
+        <div class="genuine" *ngIf="reportStatus === 'active'">
+        <img src="assets/dist/img/approved.png" style="height: 100px;"><br>
+       Mileage Report of Serial Number<br>
+       <b style="color: orange;">{{serialNo}}</b><br>
+       is<br>
+       <b style="color: #006544;">GENUINE</b><br>
+       Issued On: {{dateCreated}}<br>
+       Expire On: {{ExpiryDate}}
+       </div>
+
+       <div class="genuine" *ngIf="reportStatus === 'expired'">
+        <img src="assets/dist/img/expired.jpg" style="height: 100px;"><br>
+       Mileage Report of Serial Number<br>
+       <b style="color: orange;">{{serialNo}}</b><br>
+       is<br>
+       <b style="color: red;">EXPIRED</b><br>
+       Issued On: {{dateCreated}}<br>
+       Expired On: {{ExpiryDate}}
+       </div>
+
+       <div class="genuine" *ngIf="customer === 0">
+        <img src="assets/dist/img/invalid.jpg" style="height: 100px;"><br>
+       Mileage Report scanned<br>
+       <b style="color: orange;">{{serialNo}}</b><br>
+       is<br>
+       <b style="color: red;">FAKE!!!</b><br>
+      Please not it was note generated from AA Kenya
+       </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <h6>Copyright &copy; 2025 <a style="color: #006544;" href="https://www.aakenya.co.ke" target="_blank">AA Kenya</a>. All rights reserved.</h6>
+    <!-- /.card -->
+  </div>
+  

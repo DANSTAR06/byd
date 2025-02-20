@@ -1,0 +1,104 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/customer">Home</a></li>
+            <li class="breadcrumb-item active">My Account</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+      
+          <div class="card card-warning card-outline">
+            <div class="card-header">
+              <h3 class="card-title" style="width: 100%;">
+                <i class="fas fa-book"></i>
+                My Profile
+              </h3>
+            </div>
+            <div class="card-body">
+
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="card mb-4">
+                        <div class="card-body text-center">
+                          <img src="assets/dist/img/profile.png" alt="avatar"
+                            class="rounded-circle img-fluid" style="width: 150px;">
+                          <h5 class="my-3">{{userData.names}}</h5>
+                         
+                          
+                        </div>
+                      </div>
+                     
+                    </div>
+                    <div class="col-lg-8">
+                      <div class="card mb-4">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{userData.names}}</p>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{userData.email}}</p>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">Phone</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{userData.phone}}</p>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">Mobile</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{userData.phone}}</p>
+                            </div>
+                          </div>
+                         
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+              
+            </div>
+            <!-- /.card -->
+          </div>
+
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- ./row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

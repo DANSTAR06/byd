@@ -1,0 +1,156 @@
+.certificate-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  .certificate-template {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 210 / 297; /* A4 aspect ratio */
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .certificate-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .certificate-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //align-items: center;
+    //text-align: center;
+    color: #333;
+    padding: 20px;
+    z-index: 10;
+   // font-family: "Fantasy", "Courier New", monospace;
+    margin-top: 50px;
+  }
+  
+  .certificate-title {
+   // font-size: 2.5vw;
+    margin-bottom: 30px;
+  //  font-family: "Fantasy", "Courier New", monospace;
+  }
+  
+  .recipient-name {
+    font-size: 2vw;
+    font-weight: bold;
+    margin-bottom: 20px;
+    
+  }
+  
+  .course-details {
+    font-size: 1.2vw;
+    margin-bottom: 30px;
+  }
+  
+  .course-name {
+    font-weight: bold;
+  }
+  
+  .additional-details {
+    margin-bottom: 30px;
+    font-size: 1vw;
+  }
+  
+  .signatures {
+    // display: flex;
+    // justify-content: center;
+    // width: 100%;
+    margin-top: 100px;
+    text-align: center;
+  }
+  
+  .signature-line {
+    text-align: center;
+  }
+  
+  // .download-btn {
+  //   margin-top: 20px;
+  //  // padding: 10px 20px;
+  //   background-color: #4CAF50;
+  //   color: white;
+  //   border: none;
+  //   border-radius: 5px;
+  //   cursor: pointer;
+  //  // font-size: 1rem;
+  // }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .certificate-template {
+      max-width: 100%;
+    }
+  
+    .certificate-title {
+      font-size: 4vw;
+    }
+  
+    .recipient-name {
+      font-size: 3vw;
+    }
+  
+    .course-details {
+      font-size: 2vw;
+    }
+  
+    .additional-details {
+      font-size: 1.5vw;
+    }
+  }
+  
+  .serial{
+    position: absolute;
+    text-align: right;
+    padding: 50px;
+    z-index: 10;
+    width: 100%;
+    //font-style: oblique;
+    //font-family: "Fantasy", "Courier New", monospace;
+    color: maroon;
+  }
+  
+  .certificate-qrcode {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element horizontally */
+    width: 100px;
+    height: 100px;
+    background: white;
+    padding: 5px;
+    border-radius: 4px;
+  }
+  
+  canvas {
+    width: 100%;
+    height: 100%;
+  }

@@ -1,0 +1,40 @@
+<div class="certificate-container">
+  <div class="card">
+    <div class="card-body">
+      <button (click)="generateCertificate()" class="download-btn btn btn-outline-danger btn-sm">
+        <i class="fa fa-pdf" aria-hidden="true"></i> Download Mileage Report Certificate
+      </button>
+    </div>
+  
+  </div>
+  <div #certificateTemplate id="certificate-template" class="certificate-template">
+    <div class="certificate-background">
+      <img src="assets/dist/img/plate.jpg" class="background-image">
+      <h3 class="serial"><b>{{serialNo}}</b></h3>
+      <div class="certificate-content">
+        <h1 class="certificate-title" style="margin-left: 80px;">This is to certify that the vehicle</h1>
+        <div class="recipient-details" style="text-align: left;margin-left: 80px;">
+         <table class="table table-borderless">
+          <tr><td><b>Make</b></td><td>:</td><td>{{certData?.make}}</td></tr>
+          <tr><td><b>Model</b></td><td>:</td><td>{{certData?.model}}</td></tr>
+          <tr><td><b>Engine Capacity(CC)</b></td><td>:</td><td>{{certData?.capacity}}</td></tr>
+          <tr><td><b>Fuel Type</b></td><td>:</td><td>{{certData?.fuel}}</td></tr>
+          <tr><td><b>Number of Years</b></td><td>:</td><td>{{certData?.years}} Years</td></tr>
+         </table>
+         Has a Calculated Mileage rate of <b>{{ certData?.rate | currency : "KES" }}</b> per Kilometer.
+        </div>
+
+        <div class="signatures">
+          Generated on {{certData?.date_created}} valid untill {{certData?.expiry_date}}<br>
+          <b>To confirm validity of this certificate SCAN the QRCode Below.</b>
+        </div>
+
+        <div class="certificate-qrcode">
+          <canvas #qrCanvas></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+</div>
